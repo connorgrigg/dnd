@@ -6,6 +6,8 @@ def roll(quantity, dice):
 	out = 0
 	for i in range(quantity):
 		out = random.randint(1,dice)
+		if is_plus:
+			out = out+plusout
 		print(out)
 		sum = sum+out
 	if quantity > 1:
@@ -15,6 +17,8 @@ def roll(quantity, dice):
 
 parsed = "a"
 multiplier = "a"
+plus = "1"
+is_plus = False
 input = sys.argv[1]
 if "D" in input:
 	parsed = input.split("D")
@@ -26,11 +30,27 @@ if "X" in input:
 elif "x" in input: 
 	multiplier = parsed[1].split("x")
 	multiplierout = int(multiplier[1])
+
 quantity = int(parsed[0])
 if multiplier != "a":
-	dice = multiplier[0]
+	if "+" in multiplier:
+		plus = multiplier[1].split("+")
+		plusout = int(plus[1])
+		is_plus = True
+		dice = plus[0]
+		print(dice)
+	else:
+		dice = multiplier[0]
 else:
-	dice = parsed[1] 
+	print(parsed)
+	if parsed[1]:
+		plus = parsed[1].split("+")
+		plusout = int(plus[1])
+		is_plus = True
+		dice = plus[0]
+		print(dice)
+	else:
+		dice = parsed[1]
 roll(quantity,int(dice))
 
 # usage example: python3 dieroll.py 2D4X10
