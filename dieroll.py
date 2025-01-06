@@ -49,7 +49,7 @@ if multiplier != "a":
 	else:
 		dice = multiplier[0]
 else:
-	if parsed[1]:
+	if "+" in parsed[1]:
 		plus = parsed[1].split("+")
 		plusout = int(plus[1])
 		is_plus = True
