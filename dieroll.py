@@ -10,7 +10,9 @@ def roll(quantity, dice):
 		for i in range(quantity):
 			out = random.randint(1,dice)
 			if is_plus:
-				out = out+plusout
+				out = out + plusout
+			elif is_minus:
+				out = out - minusout
 			print(out)
 			sum = sum+out
 		if quantity > 1:
@@ -23,7 +25,9 @@ def roll(quantity, dice):
 parsed = "a"
 multiplier = "a"
 plus = "1"
+minus = "-1"
 is_plus = False
+is_minus = False
 input = sys.argv[1]
 try:
 	if "D" in input:
@@ -41,19 +45,20 @@ except Exception as e:
 
 quantity = int(parsed[0])
 if multiplier != "a":
-	if "+" in multiplier:
-		plus = multiplier[1].split("+")
-		plusout = int(plus[1])
-		is_plus = True
-		dice = plus[0]
-	else:
-		dice = multiplier[0]
+	dice = multiplier[0]
 else:
 	if "+" in parsed[1]:
 		plus = parsed[1].split("+")
 		plusout = int(plus[1])
 		is_plus = True
 		dice = plus[0]
+
+	elif "-" in parsed[1]:
+		minus = parsed[1].split("-")
+		minusout = int(minus[1])
+		is_minus = True
+		dice = minus[0]
+
 	else:
 		dice = parsed[1]
 roll(quantity,int(dice))
