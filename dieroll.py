@@ -62,5 +62,5 @@ else:
 	else:
 		dice = parsed[1]
 roll(quantity,int(dice))
-
+# Git push is working
 # usage example: python3 dieroll.py 2D4X10+1
